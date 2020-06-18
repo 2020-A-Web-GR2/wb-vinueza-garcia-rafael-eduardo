@@ -1,2 +1,0 @@
-1)Empieza Suma
-2)Termina Suma
