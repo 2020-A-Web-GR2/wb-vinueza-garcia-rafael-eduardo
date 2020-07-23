@@ -9,8 +9,10 @@ import {
     Param,
     Post,
     Put,
-    Query
+    Query, Req, Res
 } from "@nestjs/common";
+import {MascotaCreateDto} from "./dto/mascota.create-dto";
+import {validate, ValidationError} from "class-validator";
 
 //http://localhost:3001/juegos-http
 @Controller('juegos-http')
@@ -72,11 +74,100 @@ export class HttpJuegoController{
     }
 
     @Post('parametros-cuerpo')
-    parametrosCuerpo(
+    @HttpCode(200)
+    async parametrosCuerpo(
         @Body() parametrosCuerpo
     ){
+        //Promesas
+        const mascotaValida = new MascotaCreateDto();
+        mascotaValida.nombre = parametrosCuerpo.nombre;
+        mascotaValida.edad = parametrosCuerpo.edad;
+        mascotaValida.peludo = parametrosCuerpo.peludo;
+        mascotaValida.casado = parametrosCuerpo.casado;
+        mascotaValida.peso = parametrosCuerpo.peso;
+
+        try {
+            const errores:ValidationError[] = await validate(mascotaValida)
+            if(errores.length > 0){
+                console.error('Errores: ', errores);
+                throw new BadRequestException('Error validando');
+            }else{
+                const mensajeCorrecto = {
+                    mansaje: 'Se creo correctamente'
+                }
+                return mensajeCorrecto
+            }
+        }catch (e) {
+            console.error(e);
+            throw new BadRequestException('Error validando');
+        }
+
         console.log('Parametros de cuerpo',parametrosCuerpo);
         return 'Registro creado';
     }
+
+    // 1 Cookie Insegura
+    @Get('guardarCookieInsegura')
+    guardarCookieInsegura(
+        @Query() parametrosConsulta,
+        @Req() req, //request o peticion
+        @Res() res //response o respuesta
+    ){
+        res.cookie('galleta insegura', //nombre
+            'Yo tambien' //valor
+        );
+
+        const mensaje = {
+            mensaje:'ok'
+        };
+        res.send(mensaje);
+    }
+
+    // 2 Cookie Segura
+    @Get('guardarCookieSegura')
+    guardarCookieSegura(
+        @Query() parametrosConsulta,
+        @Req() req, //request o peticion
+        @Res() res //response o respuesta
+    ){
+        res.cookie('galleta segura', //nombre
+            'Web :3', //valor
+            {
+                secure: true
+            }
+        );
+
+        const mensaje = {
+            mensaje:'ok'
+        };
+        res.send(mensaje);
+    }
+
+    // 3 Mostrar Cookies
+    @Get('mostrarCookies')
+    mostrarCookies(
+        @Req() req
+    ){
+        const mensaje = {
+            sinFirmar: req.cookies,
+            firmadas: req.signedCookies
+        }
+        return mensaje;
+    }
+
+
+    @Get('guardarCookieFirmada')
+    public guardarCookieFirmada(
+        @Res() res
+    ){
+        res.cookie('firmada','poliburger',{signed:true});
+        const mensaje = {
+            mensaje:'ok'
+        };
+        res.send(mensaje);
+    }
+
+    // Para obtener los datos de las cabeceras se usa @Headers() headers - peticion
+    // Para poner cabeceras al cliente es con res.header('nombre','valor') - respuesta
 
 }
