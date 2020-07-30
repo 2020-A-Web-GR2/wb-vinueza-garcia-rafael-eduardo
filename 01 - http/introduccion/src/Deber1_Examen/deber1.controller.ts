@@ -21,7 +21,8 @@ export class Deber1Controller{
     @HttpCode(200)
     async suma(
         @Query() parametrosDeConsulta,
-        @Req() req
+        @Req() req,
+        @Res() res
     ){
         const numerosValidos = new NumerosCreateDto()
 
@@ -39,14 +40,25 @@ export class Deber1Controller{
                     console.error('Errores: ', errores);
                     throw new BadRequestException('Error validando');
                 }else{
-                    return numerosValidos.n1 + numerosValidos.n2
+
+                    var respuesta:number = numerosValidos.n1 + numerosValidos.n2;
+                    res.cookie('puntaje',Number(req.signedCookies.puntaje) - Math.abs(respuesta),{signed:true});
+                    var mensaje:string = 'El resultado de la operacion es: ' + respuesta;
+
+                    if(Number(req.signedCookies.puntaje) <= 0){
+                        res.cookie('puntaje',100,{signed:true})
+                        mensaje = mensaje + '\n' + req.cookies.usuario + ', haz terminado tus puntos, se te han restablecido de nuevo'
+                    }
+
+                    res.send(mensaje);
                 }
             }catch (e) {
                 console.error(e);
                 throw new BadRequestException('Error validando');
             }
         }else{
-            throw new BadRequestException("No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora");
+            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            res.send(mensaje);
         }
     }
 
@@ -55,7 +67,8 @@ export class Deber1Controller{
     @HttpCode(201)
     async resta(
         @Body() parametrosCuerpo,
-        @Req() req
+        @Req() req,
+        @Res() res
     ){
         const numerosValidos = new NumerosCreateDto()
 
@@ -73,14 +86,24 @@ export class Deber1Controller{
                     console.error('Errores: ', errores);
                     throw new BadRequestException('Error validando');
                 }else{
-                    return numerosValidos.n1 - numerosValidos.n2
+                    var respuesta:number = numerosValidos.n1 - numerosValidos.n2;
+                    res.cookie('puntaje',Number(req.signedCookies.puntaje) - Math.abs(respuesta),{signed:true});
+                    var mensaje:string = 'El resultado de la operacion es: ' + respuesta;
+
+                    if(Number(req.signedCookies.puntaje) <= 0){
+                        res.cookie('puntaje',100,{signed:true})
+                        mensaje = mensaje + '\n' + req.cookies.usuario + ', haz terminado tus puntos, se te han restablecido de nuevo'
+                    }
+
+                    res.send(mensaje);
                 }
             }catch (e) {
                 console.error(e);
                 throw new BadRequestException('Error validando');
             }
         }else{
-            throw new BadRequestException("No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora");
+            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            res.send(mensaje);
         }
     }
 
@@ -88,7 +111,8 @@ export class Deber1Controller{
     @HttpCode(200)
     async multiplicacion(
         @Headers() cabeceras,
-        @Req() req
+        @Req() req,
+        @Res() res
     ){
         const numerosValidos = new NumerosCreateDto()
 
@@ -106,14 +130,24 @@ export class Deber1Controller{
                     console.error('Errores: ', errores);
                     throw new BadRequestException('Error validando');
                 }else{
-                    return numerosValidos.n1 * numerosValidos.n2
+                    var respuesta:number = numerosValidos.n1 * numerosValidos.n2;
+                    res.cookie('puntaje',Number(req.signedCookies.puntaje) - Math.abs(respuesta),{signed:true});
+                    var mensaje:string = 'El resultado de la operacion es: ' + respuesta;
+
+                    if(Number(req.signedCookies.puntaje) <= 0){
+                        res.cookie('puntaje',100,{signed:true})
+                        mensaje = mensaje + '\n' + req.cookies.usuario + ', haz terminado tus puntos, se te han restablecido de nuevo'
+                    }
+
+                    res.send(mensaje);
                 }
             }catch (e) {
                 console.error(e);
                 throw new BadRequestException('Error validando');
             }
         }else{
-            throw new BadRequestException("No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora");
+            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            res.send(mensaje);
         }
     }
 
@@ -122,7 +156,8 @@ export class Deber1Controller{
     @HttpCode(201)
     async division(
         @Param() parametrosRuta,
-        @Req() req
+        @Req() req,
+        @Res() res
     ){
         const numerosValidos = new NumerosCreateDto()
 
@@ -142,40 +177,49 @@ export class Deber1Controller{
                     console.error('Errores: ', errores);
                     throw new BadRequestException('Error validando');
                 }else{
-                    return numerosValidos.n1 / numerosValidos.n2
+                    var respuesta:number = parseInt('' + numerosValidos.n1 / numerosValidos.n2,10);
+                    res.cookie('puntaje',Number(req.signedCookies.puntaje) - Math.abs(respuesta),{signed:true});
+                    var mensaje:string = 'El resultado de la operacion es: ' + respuesta;
+
+                    if(Number(req.signedCookies.puntaje) <= 0){
+                        res.cookie('puntaje',100,{signed:true})
+                        mensaje = mensaje + '\n' + req.cookies.usuario + ', haz terminado tus puntos, se te han restablecido de nuevo'
+                    }
+
+                    res.send(mensaje);
                 }
             }catch (e) {
                 console.error(e);
                 throw new BadRequestException('Error validando');
             }
         }else{
-            throw new BadRequestException("No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora");
+            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            res.send(mensaje);
         }
 
 
     }
 
     @Get('guardarNombreUsuario')
-    guardarCookieInsegura(
+    guardarCookies(
         @Query() parametrosConsulta,
-        @Req() req, //request o peticion
-        @Res() res //response o respuesta
+        @Req() req,
+        @Res() res
     ){
 
         if(parametrosConsulta.nombre != null && parametrosConsulta.nombre != undefined){
-            res.cookie('usuario', //nombre
-                parametrosConsulta.nombre //valor
-            );
+            res.cookie('usuario',parametrosConsulta.nombre);
+            res.cookie('puntaje',100,{signed:true});
 
             const mensaje = {
                 mensaje:'usuario guardado'
             };
+
             res.send(mensaje);
+
         }else{
             throw new BadRequestException('No se ha enviado el parametro "nombre"');
         }
-
-
     }
 
 
