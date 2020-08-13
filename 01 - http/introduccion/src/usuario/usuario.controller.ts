@@ -1,4 +1,15 @@
-import {Body, Controller, Delete, Get, Param, Post, Put} from "@nestjs/common";
+import {
+    BadRequestException,
+    Body,
+    Controller,
+    Delete,
+    Get,
+    InternalServerErrorException, NotFoundException,
+    Param,
+    Post,
+    Put
+} from "@nestjs/common";
+import {UsuarioService} from "./usuario.service";
 
 @Controller('usuario')
 
@@ -18,32 +29,83 @@ export class UsuarioController {
         }
     ]
     public idActual = 3;
+
+    constructor( //Inyeccion de dependencias
+        private readonly _usuarioService: UsuarioService
+    ){
+
+    }
+
     @Get()
-    mostratTodos(){
-        return this.arregloUsuarios
+    async mostratTodos(){
+        try {
+            const respuesta = await this._usuarioService.buscarTodos()
+            return respuesta
+        }catch (e) {
+            console.error(e)
+            throw new InternalServerErrorException({
+                mensaje:'Error del servidor'
+            })
+        }
+
+        //return this.arregloUsuarios
     }
 
     @Post()
-    crearUno(
+    async crearUno(
         @Body() ParametrosCuerpo
     ){
-        const nuevoUsuario = {
-            id:this.idActual + 1,
-            nombre: ParametrosCuerpo.nombre
-        };
-        this.arregloUsuarios.push(nuevoUsuario)
-        this.idActual = this.idActual + 1;
-        return nuevoUsuario
+
+        try{
+            //VALIDACION DEL CREATE DTO AQUI (DEBER)
+
+            const respuesta = await this._usuarioService.crearUno(ParametrosCuerpo)
+            return respuesta
+        }catch (e) {
+            console.error(e);
+            throw new BadRequestException({
+                mensaje:'Error validando datos'
+            })
+
+        }
+
+        // const nuevoUsuario = {
+        //     id:this.idActual + 1,
+        //     nombre: ParametrosCuerpo.nombre
+        // };
+        // this.arregloUsuarios.push(nuevoUsuario)
+        // this.idActual = this.idActual + 1;
+        // return nuevoUsuario
     }
 
     @Get(':id')
-    verUno(
+    async verUno(
         @Param() parametrosRuta
     ){
-        const indice = this.arregloUsuarios.findIndex(
-            (usuario) => usuario.id === Number(parametrosRuta.id)
-        )
-        return this.arregloUsuarios[indice]
+        let respuesta
+
+        try {
+            const respuesta = await this._usuarioService.buscarUno(Number(parametrosRuta.id))
+        }catch (e) {
+            console.error(e)
+            throw new InternalServerErrorException({
+                mensaje:'Error del servidor'
+            })
+        }
+
+        if(respuesta){
+            return respuesta;
+        }else{
+            throw new NotFoundException({
+                mensaje:'No existen registros'
+            })
+
+        }
+
+        // const indice = this.arregloUsuarios.findIndex(
+        //     (usuario) => usuario.id === Number(parametrosRuta.id)
+        // )
+        // return this.arregloUsuarios[indice]
 
     }
 
