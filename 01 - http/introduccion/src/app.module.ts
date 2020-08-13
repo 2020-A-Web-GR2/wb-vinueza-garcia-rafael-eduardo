@@ -29,7 +29,6 @@ import {UsuarioEntity} from "./usuario/usuario.entity";
           synchronize: true, //actualiza el esquema de la base de datos
           dropSchema: false, //Eliminar datos y el esquema de la base de datos
       })
-
   ],
   controllers: [
       //Controladoes del app module
