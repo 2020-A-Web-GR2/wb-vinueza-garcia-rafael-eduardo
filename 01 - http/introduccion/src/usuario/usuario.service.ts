@@ -30,6 +30,4 @@ export class UsuarioService {
     eliminarUno(id: number){
         return this.repositorio.delete(id) //promesa
     }
-
-
 }

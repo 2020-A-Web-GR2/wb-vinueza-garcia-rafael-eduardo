@@ -1,7 +1,7 @@
 import {Column, Entity, Index, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {MascotaEntity} from "../mascota/mascota.entity";
 
-@Entity('db_usuario') //nombre de la tabla usuario
+@Entity('db_usuario') //nombre de la tabla Usuario
 export class UsuarioEntity{
 
     @Index(

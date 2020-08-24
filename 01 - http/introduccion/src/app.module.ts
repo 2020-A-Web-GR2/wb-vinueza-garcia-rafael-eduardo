@@ -3,7 +3,6 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import {HttpJuegoModule} from "./http/http-juego.module";
 import {Deber1Module} from "./Deber1_Examen/deber1.module";
-import {UsuarioController} from "./usuario/usuario.controller";
 import {UsuarioModule} from "./usuario/usuario.module";
 import {TypeOrmModule} from "@nestjs/typeorm";
 import {UsuarioEntity} from "./usuario/usuario.entity";
@@ -25,7 +24,7 @@ import {VacunaEntity} from "./vacuna/vacuna.entity";
           type: 'mysql', //mysql, postgres
           host: 'localhost', //ip
           port: 3306, //puerto
-          username: 'root', //usuario
+          username: 'root', //Usuario
           password: '123456789', //password
           database: 'test', //base de datos
           entities: [

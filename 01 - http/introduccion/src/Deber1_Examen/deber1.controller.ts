@@ -57,7 +57,7 @@ export class Deber1Controller{
                 throw new BadRequestException('Error validando');
             }
         }else{
-            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            mensaje = "Error: No se ha encontrado la galleta 'Usuario', creela para usar las funciones de la calculadora"
             res.send(mensaje);
         }
     }
@@ -102,7 +102,7 @@ export class Deber1Controller{
                 throw new BadRequestException('Error validando');
             }
         }else{
-            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            mensaje = "Error: No se ha encontrado la galleta 'Usuario', creela para usar las funciones de la calculadora"
             res.send(mensaje);
         }
     }
@@ -146,7 +146,7 @@ export class Deber1Controller{
                 throw new BadRequestException('Error validando');
             }
         }else{
-            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            mensaje = "Error: No se ha encontrado la galleta 'Usuario', creela para usar las funciones de la calculadora"
             res.send(mensaje);
         }
     }
@@ -193,7 +193,7 @@ export class Deber1Controller{
                 throw new BadRequestException('Error validando');
             }
         }else{
-            mensaje = "Error: No se ha encontrado la galleta 'usuario', creela para usar las funciones de la calculadora"
+            mensaje = "Error: No se ha encontrado la galleta 'Usuario', creela para usar las funciones de la calculadora"
             res.send(mensaje);
         }
 
@@ -212,7 +212,7 @@ export class Deber1Controller{
             res.cookie('puntaje',100,{signed:true});
 
             const mensaje = {
-                mensaje:'usuario guardado'
+                mensaje:'Usuario guardado'
             };
 
             res.send(mensaje);
