@@ -1,0 +1,9 @@
+body{
+    font-family: Arial;
+    color: black;
+}
+
+th, td{
+    border: 1px solid #dddddd;
+}
+
