@@ -1,0 +1,62 @@
+<%- include ('compartido/cabecera-html') %>
+<%- include ('compartido/menu_principal') %>
+
+<h1>&nbsp;&nbsp;&nbsp;Carrito de Compras</h1>
+
+<table class="table">
+    <thead class="azul-oscuro tamanio-20">
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha de Lanzamiento</th>
+        <th scope="col">Precio</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody class="azul-oscuro tamanio-20">
+    <% arregloVideojuegos.forEach((objeto)=>{ %>
+        <tr>
+            <td><img src="<%= objeto.urlImagen %>" alt="img_videojuego" width="275" height="150"></td>
+            <td><br><br><%= objeto.nombre %></td>
+            <td><br><br><%= objeto.fechaLanzamiento %></td>
+            <td><br><br>$<%= objeto.precio %></td>
+            <td><br><br>
+                <a href="carrito-compras?eliminar=<%= objeto.id %>">
+                    <button class="btn btn-primary tamanio-20" type="button">Eliminar</button>
+                </a>
+            </td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+
+<br><br>
+
+<table class="table">
+    <thead class="azul-oscuro tamanio-20">
+    <tr>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">&nbsp;</th>
+        <th scope="col">Precio a Pagar:</th>
+        <th scope="col">$<%= precioTotal %></th>
+    </tr>
+    </thead>
+</table>
+
+<div class="form-group row">
+    <a class="btn btn-primary color-boton tamanio-24 col-sm-4" href="/factura" role="button">Comprar</a>
+    <div class="col-sm-4"></div>
+    <a class="btn btn-primary color-boton tamanio-24 col-sm-4" href="/tienda" role="button">Regresar a la tienda</a>
+</div>
+<br>
+
+<% if(Object.keys(arregloVideojuegos).length < 1){ %>
+    <br><br><br><br><br><br>
+<% } %>
+
+<%- include ('compartido/barra_inferior') %>
+<%- include ('compartido/final-html') %>

@@ -1,0 +1,51 @@
+<%- include ('compartido/cabecera-html') %>
+<%- include ('compartido/menu_principal') %>
+
+<h1>&nbsp;&nbsp;&nbsp;Tienda</h1>
+<br><br>
+<form action="/tienda" method="GET">
+    <div class="form-group row">
+        <label for="busqueda" class="col-sm-1 col-form-label tamanio-20">&nbsp;&nbsp;&nbsp;Busqueda:</label>
+        <div class="col-sm-10">
+            <input id="busqueda" type="text" name="busqueda" class="form-control tamanio-20"
+                   value="<%= parametrosConsulta.busqueda %>">
+        </div>
+        <div class="col-sm-1">
+            <button type="submit" class="btn btn-primary tamanio-20"> Buscar</button>
+        </div>
+    </div>
+</form>
+
+<table class="table">
+    <thead class="azul-oscuro tamanio-20">
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Fecha de Lanzamiento</th>
+        <th scope="col">Precio</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody class="azul-oscuro tamanio-20">
+    <% arregloVideojuegos.forEach((objeto)=>{ %>
+        <tr>
+            <td><img src="<%= objeto.urlImagen %>" alt="img_videojuego" width="275" height="150"></td>
+            <td><br><br><%= objeto.nombre %></td>
+            <td><br><br><%= objeto.fechaLanzamiento %></td>
+            <td><br><br>$<%= objeto.precio %></td>
+            <td class="centrado"><br><br>
+                <a href="ver?id=<%= objeto.id %>">
+                    <button class="btn btn-primary tamanio-20" type="button">Ver Mas</button>
+                </a>
+            </td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+
+<% if(Object.keys(arregloVideojuegos).length < 3){ %>
+    <br><br><br><br><br><br><br><br><br><br>
+<% } %>
+
+<%- include ('compartido/barra_inferior') %>
+<%- include ('compartido/final-html') %>

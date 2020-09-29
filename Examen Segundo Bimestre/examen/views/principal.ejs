@@ -1,0 +1,80 @@
+<%- include ('compartido/cabecera-html')%>
+
+<div class="row">
+    <div class="col-sm-6">
+        <h1>Pantalla Principal de Pacientes</h1>
+    </div>
+    <div class="col-sm-6 text-right">
+        <a href="/logout">
+            <button class="btn btn-primary" type="button">Cerrar Sesion</button>
+        </a>
+    </div>
+
+</div>
+<br>
+
+<% if(typeof parametrosConsulta.mensaje != 'undefined'){%>
+    <p>MENSAJE: <%= parametrosConsulta.mensaje%></p>
+<%}%>
+
+<a href="/paciente/crear">
+    <button class="btn btn-primary">Crear Paciente</button>
+</a>
+<br>
+<br>
+
+<form action="/paciente/principal" method="GET">
+    <div class="form-group row">
+        <label for="busqueda" class="col-sm-1 col-form-label">Busqueda:</label>
+        <div class="col-sm-10">
+            <input id="busqueda" type="text" name="busqueda" class="form-control" value="<%=parametrosConsulta.busqueda%>">
+        </div>
+        <div class="col-sm-1">
+            <button type="submit" class="btn btn-primary"> Buscar</button>
+        </div>
+
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Cedula</th>
+        <th scope="col">Telefono</th>
+        <th scope="col">Numero de historial</th>
+        <th scope="col">Fecha de Internamiento</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <% let i = 1%>
+    <% arregloPacientes.forEach((objeto)=>{%>
+
+    <tr>
+        <th scope="row"><%=i%></th>
+        <td><%=objeto.nombre%></td>
+        <td><%=objeto.cedula%></td>
+        <td><%=objeto.telefono%></td>
+        <td><%=objeto.numeroHistorial%></td>
+        <td><%=objeto.fechaInternamiento%></td>
+        <td>
+            <a href="editar/<%= objeto.id%>">
+                <button class="btn btn-primary" type="button">Editar</button>
+            </a>
+        </td>
+        <td>
+            <form action="eliminarDesdeVista/<%= objeto.id %>" method="POST">
+                <button type="submit" class="btn btn-primary">Eliminar</button>
+            </form>
+        </td>
+
+        <% i = i + 1%>
+    </tr>
+    <%})%>
+    </tbody>
+</table>
+
+<%- include ('compartido/final-html')%>

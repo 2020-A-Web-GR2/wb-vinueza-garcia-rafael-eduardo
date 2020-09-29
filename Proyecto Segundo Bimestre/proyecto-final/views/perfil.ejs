@@ -1,0 +1,79 @@
+<%- include ('compartido/cabecera-html') %>
+<%- include ('compartido/menu_principal') %>
+
+<div class="centrado">
+    <img src="recursos/img_perfil_usuario.png" alt="img_usuario" width="200" height="200" class="centrado">
+</div>
+<br>
+<div class="container">
+    <% if(editar){ %>
+        <form action="/perfil" method="POST">
+            <br>
+            <div class="form-group row tamanio-20">
+                <label for="input-nombre-registro" class="col-sm-3 col-form-label">Nombre:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control tamanio-20" id="input-nombre-registro" name="nombre" value="<%= usuario.nombre%>">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row tamanio-20">
+                <label for="input-correo-registro" class="col-sm-3 col-form-label">Correo Electronico:</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control tamanio-20" id="input-correo-registro" name="email" value="<%= usuario.email %>">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row tamanio-20">
+                <label for="input-telefono-registro" class="col-sm-3 col-form-label">Telefono:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control tamanio-20" id="input-telefono-registro" name="telefono" value="<%= usuario.telefono %>">
+                </div>
+            </div>
+            <br>
+            <div class="form-group row tamanio-20">
+                <label for="input-fecha-nacimiento-registro" class="col-sm-3 col-form-label">Fecha de
+                    Nacimiento:</label>
+                <div class="col-sm-9">
+                    <input type="date" class="form-control tamanio-20" id="input-fecha-nacimiento-registro" name="fechaNacimiento" value="<%= usuario.fechaNacimiento %>">
+                </div>
+            </div>
+            <br><br>
+            <div class="form-group row">
+                <button class="btn btn-primary color-boton tamanio-24 col-sm-4" type="submit">Guardar</button>
+                <div class="col-sm-4">&nbsp;</div>
+                <a class="btn btn-primary color-boton tamanio-24 col-sm-4" href="/perfil" role="button">Cancelar</a>
+            </div>
+        </form>
+        <br>
+    <% }else{ %>
+        <div class="centrado">
+            <div class="form-group row tamanio-20">
+                <p class="col-sm-6 col-form-label tamanio-24">Nombre:</p>
+                <p class="col-sm-6 col-form-label tamanio-24"><%=usuario.nombre%></p>
+            </div>
+            <br>
+            <div class="form-group row tamanio-20">
+                <p class="col-sm-6 col-form-label tamanio-24">Correo Electronico:</p>
+                <p class="col-sm-6 col-form-label tamanio-24"><%=usuario.email%></p>
+            </div>
+            <br>
+            <div class="form-group row tamanio-20">
+                <p class="col-sm-6 col-form-label tamanio-24">Telefono:</p>
+                <p class="col-sm-6 col-form-label tamanio-24"><%=usuario.telefono%></p>
+            </div>
+            <br>
+            <div class="form-group row tamanio-20">
+                <p class="col-sm-6 col-form-label tamanio-24">Fecha de Nacimiento:</p>
+                <p class="col-sm-6 col-form-label tamanio-24"><%=usuario.fechaNacimiento%></p>
+            </div>
+            <br><br>
+
+            <a class="btn btn-primary color-boton tamanio-24 centrado" href="/perfil?editar=true" role="button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Editar Informacion&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+
+        </div>
+    <% } %>
+</div>
+<br>
+
+<%- include ('compartido/barra_inferior') %>
+<%- include ('compartido/final-html') %>

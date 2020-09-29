@@ -1,0 +1,59 @@
+<%- include ('compartido/cabecera-html')%>
+<%- include ('compartido/menu_login')%>
+
+<div class="container">
+
+    <form action="/registro" method="POST">
+        <h1>Registrarse</h1>
+        <br>
+
+        <div class="form-group row tamanio-20">
+            <label for="input-nombre-registro" class="col-sm-3 col-form-label">Nombre:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control tamanio-20" id="input-nombre-registro" name="nombre" value="<%= (typeof parametrosConsulta.nombre!='undefined') ? parametrosConsulta.nombre : ''%>">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row tamanio-20">
+            <label for="input-correo-registro" class="col-sm-3 col-form-label">Correo Electronico:</label>
+            <div class="col-sm-9">
+                <input type="email" class="form-control tamanio-20" id="input-correo-registro" name="email" value="<%= (typeof parametrosConsulta.email!='undefined') ? parametrosConsulta.email : ''%>">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row tamanio-20">
+            <label for="input-telefono-registro" class="col-sm-3 col-form-label">Telefono:</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control tamanio-20" id="input-telefono-registro" name="telefono" value="<%= (typeof parametrosConsulta.telefono!='undefined') ? parametrosConsulta.telefono : ''%>">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row tamanio-20">
+            <label for="input-contrasenia-registro" class="col-sm-3 col-form-label">Contraseña:</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control tamanio-20" id="input-contrasenia-registro" name="contrasenia">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row tamanio-20">
+            <label for="input-confirmar-contrasenia-registro" class="col-sm-3 col-form-label">Confirmar Contraseña:</label>
+            <div class="col-sm-9">
+                <input type="password" class="form-control tamanio-20" id="input-confirmar-contrasenia-registro" name="confirmarContrasenia">
+            </div>
+        </div>
+        <br>
+        <div class="form-group row tamanio-20">
+            <label for="input-fecha-nacimiento-registro" class="col-sm-3 col-form-label">Fecha de Nacimiento:</label>
+            <div class="col-sm-9">
+                <input type="date" class="form-control tamanio-20" id="input-fecha-nacimiento-registro" name="fechaNacimiento" value="<%= (typeof parametrosConsulta.fechaNacimiento!='undefined') ? parametrosConsulta.fechaNacimiento : ''%>">
+            </div>
+        </div>
+        <br><br>
+
+        <button type="submit" class="btn btn-primary tamanio-24">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Crear Usuario&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+    </form>
+    <br>
+</div>
+
+<%- include ('compartido/barra_inferior')%>
+<%- include ('compartido/final-html')%>

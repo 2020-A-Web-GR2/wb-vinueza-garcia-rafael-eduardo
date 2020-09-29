@@ -1,0 +1,80 @@
+<%- include ('compartido/cabecera-html')%>
+
+<%const existePaciente = typeof paciente != 'undefined'%>
+<% let existeNombre = typeof nombre !== 'undefined' %>
+<% let existeCedula = typeof cedula !== 'undefined' %>
+<% let existeTelefono = typeof telefono !== 'undefined' %>
+<% let existeHistorial = typeof numeroHistorial !== 'undefined' %>
+<% let existeFechaInternamiento = typeof fechaInternamiento !== 'undefined' %>
+
+<h1> <%= existePaciente ? 'Editar': 'Crear'%> Paciente</h1>
+<br>
+<!--setera nombre y apellido-->
+<% if(existePaciente){%>
+
+<%existeNombre = true%>
+<%existeCedula = true%>
+<%existeTelefono = true%>
+<%existeHistorial = true%>
+<%existeFechaInternamiento = true%>
+
+<%nombre = paciente.nombre%>
+<%cedula = paciente.cedula%>
+<%telefono = paciente.telefono%>
+<%numeroHistorial = paciente.numeroHistorial%>
+<%fechaInternamiento = paciente.fechaInternamiento%>
+<%}%>
+
+<% if(error != undefined) {%>
+<p>MENSAJE ERROR: <%=error%></p>
+<%}%>
+
+<form action="<%=existePaciente ? '/paciente/editarDesdeVista/' + paciente.id: '/paciente/crearDesdeVista'%>"
+      method="POST">
+    <div class="form-group row">
+        <label for="nombreID" class="col-sm-2 col-form-label">Nombre:</label>
+        <div class="col-sm-10">
+            <input id="nombreID" class="form-control" type="text" name="nombre" value="<%= existeNombre ? nombre : '' %>">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="cedulaID" class="col-sm-2 col-form-label">Cedula:</label>
+        <div class="col-sm-10">
+            <input id="cedulaID" class="form-control" type="text"
+            <%if(existePaciente){%>
+                   disabled
+                    <%}%>
+                   name="cedula" value="<%= existeCedula ? cedula : '' %>">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="telefonoID" class="col-sm-2 col-form-label">Telefono:</label>
+        <div class="col-sm-10">
+            <input id="telefonoID" class="form-control" type="text" name="telefono" value="<%= existeTelefono ? telefono : '' %>">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="numeroHistorialID" class="col-sm-2 col-form-label">Numero de Historial:</label>
+        <div class="col-sm-10">
+            <input id="numeroHistorialID" class="form-control" type="text" name="numeroHistorial" value="<%= existeHistorial ? numeroHistorial : '' %>">
+        </div>
+    </div>
+    <div class="form-group row">
+        <label for="fechaInternamientoID" class="col-sm-2 col-form-label">Fecha de Internamiento:</label>
+        <div class="col-sm-10">
+            <input id="fechaInternamientoID" class="form-control" type="text" name="fechaInternamiento" value="<%= existeFechaInternamiento ? fechaInternamiento : '' %>">
+        </div>
+    </div>
+    <br>
+    <%if(!existePaciente){%>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Crear Paciente</button>
+    <%}else{%>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Editar Paciente</button>
+    <%}%>
+    <br>
+    <a href="/paciente/principal">
+        <button type="button" class="btn btn-primary btn-lg btn-block">Regresar</button>
+    </a>
+</form>
+
+<%- include ('compartido/final-html')%>
