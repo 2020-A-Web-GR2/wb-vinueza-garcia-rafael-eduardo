@@ -1,0 +1,55 @@
+<%- include ('compartido/cabecera-html') %>
+<%- include ('compartido/menu_principal') %>
+
+<h1 class="centrado azul-claro">Felicidades, la compra se ha realizado con exito</h1>
+<br>
+<p class="tamanio-20 azul-claro">&nbsp;&nbsp;&nbsp; Los datos de la factura son los siguientes:</p>
+<br>
+<div class="container">
+    <div class="form-group row">
+        <p class="col-sm-3 azul-claro tamanio-22">Nombre del cliente: </p>
+        <p class="col-sm-9 azul-claro tamanio-22"><%=factura.nombre%></p>
+    </div>
+    <div class="form-group row">
+        <p class="col-sm-3 azul-claro tamanio-22">Fecha de emision: </p>
+        <p class="col-sm-9 azul-claro tamanio-22"><%=factura.fechaFactura%></p>
+    </div>
+    <div class="form-group row">
+        <p class="col-sm-3 azul-claro tamanio-22">Telefono: </p>
+        <p class="col-sm-9 azul-claro tamanio-22"><%=factura.telefono%></p>
+    </div>
+    <div class="form-group row">
+        <p class="col-sm-3 azul-claro tamanio-22">Correo electronico: </p>
+        <p class="col-sm-9 azul-claro tamanio-22"><%=factura.email%></p>
+    </div>
+</div>
+<br>
+<table class="table">
+    <thead class="azul-oscuro tamanio-20">
+    <tr>
+        <th scope="col">Descripcion</th>
+        <th scope="col" class="centrado">Cantidad</th>
+        <th scope="col" class="centrado">Precio</th>
+        <th scope="col" class="centrado">Precio Total</th>
+    </tr>
+    </thead>
+    <tbody class="azul-oscuro tamanio-20">
+    <% detalles.forEach((objeto)=>{ %>
+        <tr>
+            <td><%= objeto.videojuego.nombre %></td>
+            <td class="centrado"><%= objeto.cantidad %></td>
+            <td class="centrado">$<%= objeto.precio %></td>
+            <td class="centrado">$<%= objeto.precioTotal %></td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+<br>
+<div class="container centrado">
+    <a class="btn btn-primary color-boton tamanio-24 col-sm-4" href="/tienda" role="button">Regresar a la tienda</a>
+</div>
+
+<br>
+
+<%- include ('compartido/barra_inferior') %>
+<%- include ('compartido/final-html') %>

@@ -1,0 +1,41 @@
+<%- include ('compartido/cabecera-html') %>
+<%- include ('compartido/menu_principal') %>
+
+<h1>&nbsp;&nbsp;&nbsp;Biblioteca</h1>
+
+<table class="table">
+    <thead class="azul-oscuro tamanio-20">
+    <tr>
+        <th scope="col"></th>
+        <th scope="col">Nombre</th>
+        <th scope="col" class="centrado">Fecha de Lanzamiento</th>
+        <th scope="col" class="centrado">Edad Minima</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody class="azul-oscuro tamanio-20">
+    <% arregloVideojuegos.forEach((objeto)=>{ %>
+        <tr>
+            <td><img src="<%= objeto.urlImagen %>" alt="img_videojuego" width="275" height="150"></td>
+            <td><br><br><%= objeto.nombre %></td>
+            <td class="centrado"><br><br><%= objeto.fechaLanzamiento %></td>
+            <td class="centrado"><br><br><%= objeto.edadMinima %></td>
+            <td class="centrado"><br><br>
+                <a href="videojuego.txt" download="videojuego.txt">
+                    <button class="btn btn-primary tamanio-20" type="button">Descargar</button>
+                </a>
+            </td>
+        </tr>
+    <% }) %>
+    </tbody>
+</table>
+
+<br><br>
+
+<% if(Object.keys(arregloVideojuegos).length < 1){ %>
+    <br><br><br><br><br><br> <br><br><br><br><br><br><br>
+<% } %>
+
+
+<%- include ('compartido/barra_inferior') %>
+<%- include ('compartido/final-html') %>

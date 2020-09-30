@@ -1,0 +1,52 @@
+body{
+    background-color: #03486D;
+    color: #EDE5CE;
+}
+
+.azul-oscuro{
+    background-color: #002B44;
+    color: #EDE5CE;
+}
+
+.centrado{
+    text-align: center;
+}
+
+.alinear_izquierda{
+    text-align: left;
+}
+
+.azul-claro{
+    background-color: #03486D;
+    color: #EDE5CE;
+}
+
+.color-boton{
+    background-color: #016D9C;
+    color: #EDE5CE;
+}
+
+.tamanio-12{
+    font-size: 12px;
+}
+
+.tamanio-16{
+    font-size: 16px;
+}
+
+.tamanio-20{
+    font-size: 20px;
+}
+
+.tamanio-22{
+    font-size: 22px;
+}
+
+.tamanio-24{
+    font-size: 24px;
+}
+
+.tamanio-26{
+    font-size: 26px;
+}
+
